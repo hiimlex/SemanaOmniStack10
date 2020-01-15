@@ -42,6 +42,14 @@ module.exports = {
   },
 
   async update(req, res) {
-    const dev = await Dev.findById();
+    const dev = await Dev.findByIdAndUpdate(req.params.id, req.body);
+
+    return res.json(ad);
+  },
+
+  async destroy(req, res) {
+    const dev = await Dev.findByIdAndDelete(req.params.id);
+
+    return res.send();
   }
 };
