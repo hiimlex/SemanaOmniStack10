@@ -1,6 +1,6 @@
 li.dev-item {
   background: #fff;
-  box-shadow: 0 0 14px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 0 14px rgba(0, 0, 0, 0.08);
   border-radius: 2px;
   padding: 20px;
 }
@@ -19,6 +19,22 @@ li.dev-item header img {
 
 li.dev-item header .user-info {
   margin-left: 10px;
+}
+
+li.dev-item header button.delete-dev {
+  margin-left: auto;
+  margin-top: -20px;
+  right: 0;
+  border: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+li.dev-item header button.delete-dev:hover {
+  background: #dbdbdb;
 }
 
 .user-info strong {

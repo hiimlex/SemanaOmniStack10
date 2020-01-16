@@ -28,6 +28,14 @@ function App() {
     setDevs([...devs, response.data]);
   }
 
+  async function handleRemoveDev(data) {
+    await api.delete(`/devs/${data}`);
+
+    const response = await api.get("devs");
+
+    setDevs(response.data);
+  }
+
   return (
     <div id="app">
       <aside>
@@ -37,7 +45,7 @@ function App() {
       <main>
         <ul>
           {devs.map(dev => (
-            <DevItem key={dev._id} dev={dev} />
+            <DevItem key={dev._id} dev={dev} onClick={handleRemoveDev} />
           ))}
         </ul>
       </main>
