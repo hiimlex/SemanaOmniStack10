@@ -1,32 +1,42 @@
 import React from "react";
 
-import "./styles.css";
+import "./style.css";
 import "font-awesome/css/font-awesome.css";
 
-function DevItem(props) {
-  const { dev, onClick } = props;
+function DevItem({ dev, onEdit, onDelete }) {
+  const [{ editMode, dev: oldDev }, setEditMode] = onEdit;
 
-  async function removeDev() {
-    await onClick(dev._id);
+  function editDev() {
+    setEditMode({
+      editMode: oldDev._id !== dev._id ? true : !editMode, // Se selecionou um Dev diferente, obrigatóriamente editMode deve ser true.
+      dev // Novo Dev
+    });
+  }
+
+  function deleteDev() {
+    onDelete(dev.github);
   }
 
   return (
     <li className="dev-item">
       <header>
-        <img src={dev.avatar_url} alt={dev.name} />
+        <img
+          src={dev.avatar_url}
+          alt={dev.name === null ? dev.github : dev.name}
+        />
         <div className="user-info">
-          <strong>{dev.name}</strong>
+          <strong>{dev.name === null ? dev.github : dev.name}</strong>
           <span>{dev.techs.join(", ")}</span>
         </div>
-        <button className="delete-dev" onClick={removeDev}>
+        <button className="edit-dev" onClick={editDev}>
+          <i className="fa fa-pencil"></i>
+        </button>
+        <button className="delete-dev" onClick={deleteDev}>
           <i className="fa fa-times"></i>
         </button>
       </header>
-
       <p>{dev.bio}</p>
-      <a href={`https://github.com/${dev.github_username}`}>
-        Acessar perfil no Github
-      </a>
+      <a href={`https://github.com/${dev.github}`}>Acessar perfil no GitHub</a>
     </li>
   );
 }

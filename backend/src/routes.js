@@ -1,17 +1,23 @@
-const { Router } = require("express");
-
-const DevController = require("./controllers/DevController");
-const SearchController = require("./controllers/SearchController");
-
+const { Router } = require('express');
+const DevController = require('./controllers/DevController')
+const SearchController = require('./controllers/SearchController')
 const routes = Router();
 
-//api.get("/devs")
+// Query: req.query
+// Route: req.params
+// Body : req.body
 
-routes.get("/devs", DevController.index);
-routes.post("/devs", DevController.store);
-routes.put("/devs/:id", DevController.update);
-routes.delete("/devs/:id", DevController.destroy);
 
-routes.get("/search", SearchController.index);
+routes
+
+    // DEVS Endpoint
+    .get('/devs', DevController.index)
+    .post('/devs', DevController.create)
+    .get('/devs/:github', DevController.read)
+    .put('/devs/:github', DevController.update)
+    .delete('/devs/:github', DevController.delete)
+
+    // SEARCH Endpoint
+    .get('/search', SearchController.index);
 
 module.exports = routes;
