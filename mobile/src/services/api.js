@@ -1,7 +1,19 @@
 import axios from "axios";
 
-const api = axios.create({
-  baseURL: "http://192.168.1.2:3333"
-});
+const baseURL = "http://192.168.1.6:3333";
 
-export default api;
+function createAPI() {
+  if (baseURL.startsWith("http://<")) {
+    let redStr = "\x1b[31m";
+    console.error(redStr + "ERRO! Você não configurou o Servidor ainda!");
+    console.error(
+      redStr +
+        "Adicione o seu endereço:3333 (Backend) no arquivo api.js! (Por exemplo http://192.168.1.5:3333)"
+    );
+    return;
+  }
+
+  return axios.create({ baseURL });
+}
+const api = createAPI();
+export { baseURL, api };
